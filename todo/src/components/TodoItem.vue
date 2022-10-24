@@ -8,6 +8,7 @@
     >
       {{ todoItem.text }}
     </span>
+    <button class="btn btn-danger btn-sm" @click="handleDelete">Delete</button>
   </div>
 </template>
 
@@ -25,6 +26,9 @@ export default {
         id: this.todoItem.id,
         checked: e.target.checked,
       });
+    },
+    handleDelete() {
+      this.$emit("handle-delete", this.todoItem.id);
     },
   },
 };

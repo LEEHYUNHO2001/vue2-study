@@ -13,6 +13,7 @@
       :key="todoItem.id"
       :todoItem="todoItem"
       @toggle-check="toggleCheck"
+      @handle-delete="deleteTodo"
     />
   </div>
 </template>
@@ -53,6 +54,9 @@ export default {
     toggleCheck({ id, checked }) {
       const index = this.todoItems.findIndex((todoItem) => todoItem.id === id);
       this.todoItems[index].checked = checked;
+    },
+    deleteTodo(id) {
+      this.todoItems = this.todoItems.filter((todoItem) => todoItem.id !== id);
     },
   },
 };
