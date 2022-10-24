@@ -1,17 +1,10 @@
 <template>
   <div id="app" class="container">
     <h1 class="text-center">TODO</h1>
-    <input
-      type="text"
-      class="w-100 p-2"
-      placeholder="할일을 입력하세요"
-      v-model="todoInput"
-      @keyup.enter="addTodoItem"
-    />
-    <TodoItem
-      v-for="todoItem in todoItems"
-      :key="todoItem.id"
-      :todoItem="todoItem"
+    <CompleteTodo :todoItems="todoItems" />
+    <AddTodoInput @handle-add-todo="addTodoItem" />
+    <TodoList
+      :todoItems="todoItems"
       @toggle-check="toggleCheck"
       @handle-delete="deleteTodo"
     />
@@ -19,15 +12,18 @@
 </template>
 
 <script>
-import TodoItem from "@/components/TodoItem.vue";
+import TodoList from "@/components/TodoList.vue";
+import AddTodoInput from "@/components/AddTodoInput.vue";
+import CompleteTodo from "@/components/CompleteTodo.vue";
 
 export default {
   components: {
-    TodoItem,
+    TodoList,
+    AddTodoInput,
+    CompleteTodo,
   },
   data() {
     return {
-      todoInput: "",
       todoItems: [
         {
           id: 1,
@@ -43,13 +39,12 @@ export default {
     };
   },
   methods: {
-    addTodoItem(e) {
+    addTodoItem(value) {
       this.todoItems.push({
-        id: this.todoItems.length + 1,
-        text: e.target.value,
+        id: this.todoItems[this.todoItems.length - 1].id + 1,
+        text: value,
         checked: false,
       });
-      this.todoInput = "";
     },
     toggleCheck({ id, checked }) {
       const index = this.todoItems.findIndex((todoItem) => todoItem.id === id);
