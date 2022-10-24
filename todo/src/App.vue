@@ -12,6 +12,7 @@
       v-for="todoItem in todoItems"
       :key="todoItem.id"
       :todoItem="todoItem"
+      @toggle-check="toggleCheck"
     />
   </div>
 </template>
@@ -48,6 +49,10 @@ export default {
         checked: false,
       });
       this.todoInput = "";
+    },
+    toggleCheck({ id, checked }) {
+      const index = this.todoItems.findIndex((todoItem) => todoItem.id === id);
+      this.todoItems[index].checked = checked;
     },
   },
 };
