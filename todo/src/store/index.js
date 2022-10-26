@@ -20,8 +20,13 @@ export default new Vuex.Store({
   },
   mutations: {
     ADD_TODO_ITEM(state, value) {
+      const newId =
+        state.todoItems.length > 0
+          ? state.todoItems[state.todoItems.length - 1].id + 1
+          : 0;
+
       state.todoItems.push({
-        id: state.todoItems[state.todoItems.length - 1].id + 1,
+        id: newId,
         text: value,
         checked: false,
       });
