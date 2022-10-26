@@ -1,13 +1,9 @@
 <template>
   <div id="app" class="container">
     <h1 class="text-center">TODO</h1>
-    <CompleteTodo :todoItems="todoItems" />
+    <CompleteTodo />
     <AddTodoInput @handle-add-todo="addTodoItem" />
-    <TodoList
-      :todoItems="todoItems"
-      @toggle-check="toggleCheck"
-      @handle-delete="deleteTodo"
-    />
+    <TodoList @toggle-check="toggleCheck" @handle-delete="deleteTodo" />
   </div>
 </template>
 
@@ -21,22 +17,6 @@ export default {
     TodoList,
     AddTodoInput,
     CompleteTodo,
-  },
-  data() {
-    return {
-      todoItems: [
-        {
-          id: 1,
-          text: "Vue2 기초 공부",
-          checked: false,
-        },
-        {
-          id: 2,
-          text: "Vue2 + Typescript 공부",
-          checked: false,
-        },
-      ],
-    };
   },
   methods: {
     addTodoItem(value) {

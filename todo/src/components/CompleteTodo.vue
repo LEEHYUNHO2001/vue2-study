@@ -4,13 +4,10 @@
 
 <script>
 export default {
-  props: {
-    todoItems: {
-      tpye: Array,
-      required: true,
-    },
-  },
   computed: {
+    todoItems() {
+      return this.$store.state.todoItems;
+    },
     numberOfCompleteTodo() {
       return this.todoItems.filter((todoItem) => todoItem.checked).length;
     },
