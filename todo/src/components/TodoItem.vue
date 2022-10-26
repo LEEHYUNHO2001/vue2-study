@@ -22,13 +22,13 @@ export default {
   },
   methods: {
     toggleCheck(e) {
-      this.$emit("toggle-check", {
+      this.$store.commit("TOGGLE_TODO_CHECK", {
         id: this.todoItem.id,
         checked: e.target.checked,
       });
     },
     handleDelete() {
-      this.$emit("handle-delete", this.todoItem.id);
+      this.$store.commit("DELETE_TODO", this.todoItem.id);
     },
   },
 };

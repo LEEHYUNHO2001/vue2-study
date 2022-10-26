@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     handleAddTodo(e) {
-      this.$emit("handle-add-todo", e.target.value);
+      this.$store.commit("ADD_TODO_ITEM", e.target.value);
       this.todoInput = "";
     },
   },

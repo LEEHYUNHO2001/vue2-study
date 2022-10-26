@@ -18,4 +18,22 @@ export default new Vuex.Store({
       },
     ],
   },
+  mutations: {
+    ADD_TODO_ITEM(state, value) {
+      state.todoItems.push({
+        id: state.todoItems[state.todoItems.length - 1].id + 1,
+        text: value,
+        checked: false,
+      });
+    },
+    TOGGLE_TODO_CHECK(state, { id, checked }) {
+      const index = state.todoItems.findIndex((todoItem) => todoItem.id === id);
+      state.todoItems[index].checked = checked;
+    },
+    DELETE_TODO(state, todoItemId) {
+      state.todoItems = state.todoItems.filter(
+        (todoItem) => todoItem.id !== todoItemId
+      );
+    },
+  },
 });
