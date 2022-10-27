@@ -74,4 +74,9 @@ export default new Vuex.Store({
       }, 500);
     },
   },
+  getters: {
+    numberOfCompleteTodo: (state) => {
+      return state.todoItems.filter((todoItem) => todoItem.checked).length;
+    },
+  },
 });
