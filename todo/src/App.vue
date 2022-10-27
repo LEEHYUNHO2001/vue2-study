@@ -4,6 +4,7 @@
     <CompleteTodo />
     <AddTodoInput />
     <TodoList />
+    <UserList />
   </div>
 </template>
 
@@ -11,12 +12,14 @@
 import TodoList from "@/components/TodoList.vue";
 import AddTodoInput from "@/components/AddTodoInput.vue";
 import CompleteTodo from "@/components/CompleteTodo.vue";
+import UserList from "@/components/UserList.vue";
 
 export default {
   components: {
     TodoList,
     AddTodoInput,
     CompleteTodo,
+    UserList,
   },
 };
 </script>
