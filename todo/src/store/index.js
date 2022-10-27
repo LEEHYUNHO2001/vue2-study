@@ -41,4 +41,22 @@ export default new Vuex.Store({
       );
     },
   },
+  actions: {
+    addTodoItem({ commit }, value) {
+      // 보통 axios와 같은 비동기 처리를 하게 됨
+      setTimeout(() => {
+        commit("ADD_TODO_ITEM", value);
+      }, 500);
+    },
+    toggleTodoCheck({ commit }, payload) {
+      setTimeout(() => {
+        commit("TOGGLE_TODO_CHECK", payload);
+      }, 500);
+    },
+    deleteTodo({ commit }, todoItemId) {
+      setTimeout(() => {
+        commit("DELETE_TODO", todoItemId);
+      }, 500);
+    },
+  },
 });

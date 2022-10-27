@@ -17,7 +17,11 @@ export default {
   },
   methods: {
     handleAddTodo(e) {
-      this.$store.commit("ADD_TODO_ITEM", e.target.value);
+      // state 변경 (mutations)
+      // this.$store.commit("ADD_TODO_ITEM", e.target.value);
+
+      // 비동기 처리 (actions)
+      this.$store.dispatch("addTodoItem", e.target.value);
       this.todoInput = "";
     },
   },
