@@ -22,18 +22,20 @@ export default {
   },
   methods: {
     toggleCheck(e) {
-      // this.$store.commit("TOGGLE_TODO_CHECK", {
-      //   id: this.todoItem.id,
-      //   checked: e.target.checked,
-      // });
       this.$store.dispatch("toggleTodoCheck", {
         id: this.todoItem.id,
         checked: e.target.checked,
       });
+
+      // this.$store.commit("TOGGLE_TODO_CHECK", {
+      //   id: this.todoItem.id,
+      //   checked: e.target.checked,
+      // });
     },
     deleteTodo() {
-      // this.$store.commit("DELETE_TODO", this.todoItem.id);
       this.$store.dispatch("deleteTodo", this.todoItem.id);
+
+      // this.$store.commit("DELETE_TODO", this.todoItem.id);
     },
   },
 };

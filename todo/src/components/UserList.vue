@@ -15,7 +15,9 @@ export default {
     this.getUsers();
   },
   computed: {
-    ...mapState(["users"]),
+    ...mapState({
+      users: (state) => state.user.users,
+    }),
 
     // mapState로 아래의 코드를 위의 코드로 줄이기 가능
     // users() {
