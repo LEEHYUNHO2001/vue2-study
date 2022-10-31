@@ -32,12 +32,16 @@ export default {
     boardSize() {},
     doDragItem(e) {
       if (this.box.dragging) {
-        this.box.x = e.clientX;
-        this.box.y = e.clientY;
+        this.box.x = e.clientX - this.box.clickX;
+        this.box.y = e.clientY - this.box.clickY;
       }
     },
-    startDragItem() {
+    startDragItem(e) {
       this.box.dragging = true;
+
+      // box의 클릭 한 부분 기준으로 드래그 기능
+      this.box.clickX = e.clientX - this.box.x;
+      this.box.clickY = e.clientY - this.box.y;
     },
     stopDragItem() {
       this.box.dragging = false;
@@ -71,6 +75,7 @@ h3 {
   position: absolute;
   width: 50px;
   height: 50px;
+  border-radius: 10px;
   background-color: #fff;
 }
 </style>
