@@ -9,19 +9,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 import { User } from '@/types';
 
 @Component
 export default class UserList extends Vue {
-	userList = [
-		{
-			name: 'example user',
-			phoneNumber: '01012345678',
-			email: 'ex1@iga.com',
-		},
-	] as User[];
+	@Prop() public userList!: User[];
 }
 </script>
 

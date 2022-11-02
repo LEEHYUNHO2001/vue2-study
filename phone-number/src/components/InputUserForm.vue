@@ -9,6 +9,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+
 import {
 	nameRegex,
 	phoneNumberRegex,
@@ -24,6 +25,11 @@ export default class InputUserForm extends Vue {
 		email: '',
 	} as User;
 
+	// @Emit('addUser')
+	// private addUser() {
+
+	// }
+
 	userDataSubmit() {
 		if (
 			!this.emptyValidate() &&
@@ -31,8 +37,16 @@ export default class InputUserForm extends Vue {
 			!this.phoneNumberValidate() &&
 			!this.emailValidate()
 		) {
-			console.log(this.user);
+			this.$emit('addUser', this.user);
+			this.clearInput();
 		}
+	}
+	clearInput() {
+		this.user = {
+			name: '',
+			phoneNumber: '',
+			email: '',
+		};
 	}
 	emptyValidate() {
 		const { name, phoneNumber, email } = this.user;
