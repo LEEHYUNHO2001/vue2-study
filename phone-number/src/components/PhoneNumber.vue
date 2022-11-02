@@ -1,32 +1,31 @@
 <template>
-	<div class="phone-number">
-		<h1>{{ title }}</h1>
-	</div>
+	<section class="phone-number">
+		<h1 class="title">{{ title }}</h1>
+		<InputUserForm />
+	</section>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-@Component
-export default class HelloWorld extends Vue {
+import InputUserForm from './InputUserForm.vue';
+
+@Component({
+	components: {
+		InputUserForm,
+	},
+})
+export default class PhoneNumber extends Vue {
 	title = '전화번호부';
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-	margin: 40px 0 0;
+.phone-number {
+	margin: 50px;
 }
-ul {
-	list-style-type: none;
-	padding: 0;
-}
-li {
-	display: inline-block;
-	margin: 0 10px;
-}
-a {
-	color: #42b983;
+.title {
+	text-align: center;
+	font-size: 30px;
 }
 </style>
