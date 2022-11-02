@@ -14,12 +14,7 @@ import {
 	phoneNumberRegex,
 	emailRegex,
 } from '@/constants/validation';
-
-interface User {
-	name: string;
-	phoneNumber: string;
-	email: string;
-}
+import { User } from '@/types';
 
 @Component
 export default class InputUserForm extends Vue {
