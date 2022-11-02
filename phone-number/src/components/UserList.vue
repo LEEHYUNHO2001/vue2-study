@@ -1,6 +1,11 @@
 <template>
 	<ul class="user-container">
-		<li class="user" v-for="user in userList" :key="user.email">
+		<li
+			class="user"
+			:class="{ odd: isOdd(index) }"
+			v-for="(user, index) in userList"
+			:key="user.email"
+		>
 			<p>user : {{ user.name }}</p>
 			<p>phone number : {{ user.phoneNumber }}</p>
 			<p>email : {{ user.email }}</p>
@@ -17,6 +22,11 @@ import { User } from '@/types';
 @Component
 export default class UserList extends Vue {
 	@Prop() public userList!: User[];
+
+	isOdd(index: number) {
+		if (index % 2 === 1) return true;
+		return false;
+	}
 }
 </script>
 
@@ -33,5 +43,8 @@ export default class UserList extends Vue {
 	height: 200px;
 	margin-top: 20px;
 	border: 1px solid #000;
+}
+.odd {
+	background-color: #f2f2f2;
 }
 </style>
