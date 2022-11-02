@@ -15,13 +15,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-
-import { User } from '@/types';
+import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class UserList extends Vue {
-	@Prop() public userList!: User[];
+	// @Prop() public userList!: User[];
+	userList = this.$store.state.user.userList;
 
 	isOdd(index: number) {
 		if (index % 2 === 1) return true;

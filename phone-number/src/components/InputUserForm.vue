@@ -26,10 +26,10 @@ export default class InputUserForm extends Vue {
 		date: '',
 	} as User;
 
+	// userDataSubmit에서 this.$emit('addUser', this.user);
+	// 대신 this.addUser(this.user) 사용 가능
 	// @Emit('addUser')
-	// private addUser() {
-
-	// }
+	// private addUser() {}
 
 	userDataSubmit() {
 		if (
@@ -39,7 +39,8 @@ export default class InputUserForm extends Vue {
 			!this.emailValidate()
 		) {
 			this.currentDate();
-			this.$emit('addUser', this.user);
+			// this.$emit('addUser', this.user);
+			this.$store.commit('ADD_USER', this.user);
 			this.clearInput();
 		}
 	}
