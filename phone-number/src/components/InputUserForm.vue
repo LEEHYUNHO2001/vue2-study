@@ -23,6 +23,7 @@ export default class InputUserForm extends Vue {
 		name: '',
 		phoneNumber: '',
 		email: '',
+		date: '',
 	} as User;
 
 	// @Emit('addUser')
@@ -37,15 +38,27 @@ export default class InputUserForm extends Vue {
 			!this.phoneNumberValidate() &&
 			!this.emailValidate()
 		) {
+			this.currentDate();
 			this.$emit('addUser', this.user);
 			this.clearInput();
 		}
+	}
+	currentDate() {
+		const current = new Date();
+		const year = current.getFullYear();
+		const month = current.getMonth() + 1;
+		const date = current.getDate();
+		const hours = current.getHours();
+		const minutes = current.getMinutes();
+
+		this.user.date = `${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분`;
 	}
 	clearInput() {
 		this.user = {
 			name: '',
 			phoneNumber: '',
 			email: '',
+			date: '',
 		};
 	}
 	emptyValidate() {

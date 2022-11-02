@@ -4,6 +4,7 @@
 			<p>user : {{ user.name }}</p>
 			<p>phone number : {{ user.phoneNumber }}</p>
 			<p>email : {{ user.email }}</p>
+			<p>date : {{ user.date }}</p>
 		</li>
 	</ul>
 </template>
