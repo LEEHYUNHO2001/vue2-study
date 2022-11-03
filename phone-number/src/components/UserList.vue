@@ -1,7 +1,7 @@
 <template>
 	<ul class="user-container">
 		<li v-for="(user, index) in userList" :key="user.email">
-			<UserItem :user="user" :index="index" />
+			<UserItemContainer :user="user" :index="index" />
 		</li>
 	</ul>
 </template>
@@ -9,11 +9,11 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import UserItem from './UserItem.vue';
+import UserItemContainer from './UserItemContainer.vue';
 
 @Component({
 	components: {
-		UserItem,
+		UserItemContainer,
 	},
 })
 export default class UserList extends Vue {

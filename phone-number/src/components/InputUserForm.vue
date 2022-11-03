@@ -32,12 +32,7 @@ export default class InputUserForm extends Vue {
 	// private addUser() {}
 
 	userDataSubmit() {
-		if (
-			!this.emptyValidate() &&
-			!this.userNameValidate() &&
-			!this.phoneNumberValidate() &&
-			!this.emailValidate()
-		) {
+		if (this.allValidate()) {
 			this.currentDate();
 			// this.$emit('addUser', this.user);
 			this.$store.commit('ADD_USER', this.user);
@@ -61,6 +56,15 @@ export default class InputUserForm extends Vue {
 			email: '',
 			date: '',
 		};
+	}
+	allValidate() {
+		if (
+			!this.emptyValidate() &&
+			!this.userNameValidate() &&
+			!this.phoneNumberValidate() &&
+			!this.emailValidate()
+		)
+			return true;
 	}
 	emptyValidate() {
 		const { name, phoneNumber, email } = this.user;
@@ -100,7 +104,6 @@ export default class InputUserForm extends Vue {
 <style scoped>
 .input-form {
 	display: flex;
-	justify-content: space-between;
 	margin-top: 50px;
 }
 .input-form > input {
