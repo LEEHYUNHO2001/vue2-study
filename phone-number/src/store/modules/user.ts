@@ -14,13 +14,13 @@ export default {
 		userList: [
 			{
 				name: 'example user',
-				phoneNumber: '12345678',
+				phoneNumber: '1112',
 				email: 'ex1@iga.com',
 				date: '2022년 3월 20일 14시 21분',
 			},
 			{
 				name: 'example user',
-				phoneNumber: '12345678',
+				phoneNumber: '2223',
 				email: 'ex2@iga.com',
 				date: '2021년 3월 20일 14시 21분',
 			},

@@ -1,13 +1,15 @@
 <template>
 	<ul class="user-container">
-		<li v-for="(user, index) in userList" :key="user.email">
+		<li v-for="(user, index) in filteredUserList" :key="user.email">
 			<UserItemContainer :user="user" :index="index" />
 		</li>
 	</ul>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
+
+import { User } from '@/types';
 
 import UserItemContainer from './UserItemContainer.vue';
 
@@ -17,9 +19,7 @@ import UserItemContainer from './UserItemContainer.vue';
 	},
 })
 export default class UserList extends Vue {
-	get userList() {
-		return this.$store.state.user.userList;
-	}
+	@Prop() public filteredUserList!: User[];
 }
 </script>
 

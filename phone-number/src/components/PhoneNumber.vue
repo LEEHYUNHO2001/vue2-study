@@ -1,21 +1,18 @@
 <template>
 	<section class="phone-number">
 		<h1 class="title">{{ title }}</h1>
-		<InputUserForm />
-		<UserList />
+		<SearchUserItem />
 	</section>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import InputUserForm from './InputUserForm.vue';
-import UserList from './UserList.vue';
+import SearchUserItem from './SearchUserItem.vue';
 
 @Component({
 	components: {
-		InputUserForm,
-		UserList,
+		SearchUserItem,
 	},
 })
 export default class PhoneNumber extends Vue {
