@@ -1,22 +1,20 @@
 <template>
-	<div class="user-content">
-		<button type="button" class="submit-update-btn" @click="handleUpdating">
-			update submit
-		</button>
+	<form class="user-content" @submit.prevent="userDataUpdate">
+		<button type="submit" class="submit-update-btn">update submit</button>
 		<div>
 			<label> user : </label>
-			<input class="update-user-input" :value="user.name" />
+			<input class="update-user-input" v-model="updatingUser.name" />
 		</div>
 		<div>
 			<label>phone number : </label>
-			<input class="update-user-input" :value="user.phoneNumber" />
+			<input class="update-user-input" v-model="updatingUser.phoneNumber" />
 		</div>
 		<div>
 			<label>email : </label>
-			<input class="update-user-input" :value="user.email" />
+			<input class="update-user-input" v-model="updatingUser.email" />
 		</div>
 		<div><label>date : </label>{{ user.date }}</div>
-	</div>
+	</form>
 </template>
 
 <script lang="ts">
@@ -27,10 +25,18 @@ import { User } from '@/types';
 @Component
 export default class UpdateUserItem extends Vue {
 	@Prop() public user!: User;
-	@Prop() public isUpdating!: boolean;
+	@Prop() public index!: number;
+	updatingUser = { ...this.$props.user };
 
-	handleUpdating() {
-		this.$emit('handleUpdating');
+	handleIsUpdating() {
+		this.$emit('handleIsUpdating');
+	}
+	userDataUpdate() {
+		this.$store.commit('UPDATE_USER', {
+			user: this.updatingUser,
+			index: this.index,
+		});
+		this.handleIsUpdating();
 	}
 }
 </script>

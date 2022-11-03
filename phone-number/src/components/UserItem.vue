@@ -1,6 +1,6 @@
 <template>
 	<div class="user-content">
-		<button type="button" class="update-btn" @click="handleUpdating">
+		<button type="button" class="update-btn" @click="handleIsUpdating">
 			update
 		</button>
 		<p>user : {{ user.name }}</p>
@@ -18,10 +18,9 @@ import { User } from '@/types';
 @Component
 export default class UserItem extends Vue {
 	@Prop() public user!: User;
-	@Prop() public isUpdating!: boolean;
 
-	handleUpdating() {
-		this.$emit('handleUpdating');
+	handleIsUpdating() {
+		this.$emit('handleIsUpdating');
 	}
 }
 </script>

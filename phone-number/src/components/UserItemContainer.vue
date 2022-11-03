@@ -3,9 +3,14 @@
 		<UserItem
 			v-if="!isUpdating"
 			:user="user"
-			@handleUpdating="handleUpdating"
+			@handleIsUpdating="handleIsUpdating"
 		/>
-		<UpdateUserItem v-else :user="user" @handleUpdating="handleUpdating" />
+		<UpdateUserItem
+			v-else
+			:user="user"
+			@handleIsUpdating="handleIsUpdating"
+			:index="index"
+		/>
 	</div>
 </template>
 
@@ -32,7 +37,7 @@ export default class UserItemContainer extends Vue {
 		if (index % 2 === 1) return true;
 		return false;
 	}
-	handleUpdating() {
+	handleIsUpdating() {
 		this.isUpdating = !this.isUpdating;
 	}
 }
