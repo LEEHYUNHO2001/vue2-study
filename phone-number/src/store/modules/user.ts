@@ -14,7 +14,7 @@ export default {
 		userList: [
 			{
 				name: 'example user',
-				phoneNumber: '01012345678',
+				phoneNumber: '12345678',
 				email: 'ex1@iga.com',
 				date: '2022년 3월 20일 14시 21분',
 			},

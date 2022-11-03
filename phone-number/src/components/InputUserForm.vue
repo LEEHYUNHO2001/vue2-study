@@ -10,11 +10,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import {
-	nameRegex,
-	phoneNumberRegex,
-	emailRegex,
-} from '@/constants/validation';
+import { allValidate } from '@/utils/validate';
 import { User } from '@/types';
 
 @Component
@@ -32,7 +28,7 @@ export default class InputUserForm extends Vue {
 	// private addUser() {}
 
 	userDataSubmit() {
-		if (this.allValidate()) {
+		if (allValidate(this.user)) {
 			this.currentDate();
 			// this.$emit('addUser', this.user);
 			this.$store.commit('ADD_USER', this.user);
@@ -56,47 +52,6 @@ export default class InputUserForm extends Vue {
 			email: '',
 			date: '',
 		};
-	}
-	allValidate() {
-		if (
-			!this.emptyValidate() &&
-			!this.userNameValidate() &&
-			!this.phoneNumberValidate() &&
-			!this.emailValidate()
-		)
-			return true;
-	}
-	emptyValidate() {
-		const { name, phoneNumber, email } = this.user;
-		if (!name || !phoneNumber || !email) {
-			alert('모두 입력해주세요.');
-			return true;
-		}
-	}
-	userNameValidate() {
-		const { name } = this.user;
-		if (
-			!nameRegex.test(name) ||
-			name.length > 20 ||
-			name.split(' ').join('').length === 0
-		) {
-			alert('20자리 이하의 영문 + 띄어쓰기 조합으로 이름을 적어주세요.');
-			return true;
-		}
-	}
-	phoneNumberValidate() {
-		const { phoneNumber } = this.user;
-		if (!phoneNumberRegex.test(phoneNumber) || phoneNumber.length > 10) {
-			alert('10자리 이하의 숫자만 입력해주세요.');
-			return true;
-		}
-	}
-	emailValidate() {
-		const { email } = this.user;
-		if (!emailRegex.test(email) || email.length > 40) {
-			alert('40자리 이하의 이메일 형식으로 입력해주세요.');
-			return true;
-		}
 	}
 }
 </script>

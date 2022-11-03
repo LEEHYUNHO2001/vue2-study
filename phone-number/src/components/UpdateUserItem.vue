@@ -20,6 +20,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
+import { allValidate } from '@/utils';
 import { User } from '@/types';
 
 @Component
@@ -32,11 +33,13 @@ export default class UpdateUserItem extends Vue {
 		this.$emit('handleIsUpdating');
 	}
 	userDataUpdate() {
-		this.$store.commit('UPDATE_USER', {
-			user: this.updatingUser,
-			index: this.index,
-		});
-		this.handleIsUpdating();
+		if (allValidate(this.updatingUser)) {
+			this.$store.commit('UPDATE_USER', {
+				user: this.updatingUser,
+				index: this.index,
+			});
+			this.handleIsUpdating();
+		}
 	}
 }
 </script>
