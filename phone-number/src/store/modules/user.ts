@@ -47,5 +47,8 @@ export default {
 		DELETE_USER(state: AddUserState, index: number) {
 			state.userList = state.userList.filter((_, i) => i !== index);
 		},
+		CLEAR_USER(state: AddUserState) {
+			state.userList = [];
+		},
 	},
 };

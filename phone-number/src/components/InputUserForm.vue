@@ -4,6 +4,7 @@
 		<input placeholder="phoneNumber" v-model="user.phoneNumber" />
 		<input placeholder="email" v-model="user.email" />
 		<button type="submit">create</button>
+		<button type="button" @click="userDataClear">clear</button>
 	</form>
 </template>
 
@@ -27,6 +28,9 @@ export default class InputUserForm extends Vue {
 	// @Emit('addUser')
 	// private addUser() {}
 
+	userDataClear() {
+		this.$store.commit('CLEAR_USER');
+	}
 	userDataSubmit() {
 		if (allValidate(this.user)) {
 			this.currentDate();
@@ -69,6 +73,7 @@ export default class InputUserForm extends Vue {
 .input-form > button {
 	height: 30px;
 	padding: 0px 10px;
+	margin-left: 10px;
 	color: #fff;
 	background-color: #000;
 }
