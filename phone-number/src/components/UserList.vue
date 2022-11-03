@@ -1,11 +1,15 @@
 <template>
   <div>
-    <ul class="user-container" v-if="filteredUserList.length > 0">
+    <ul
+      class="user-container"
+      v-if="filteredUserList.length > 0 && search === ''"
+    >
       <li v-for="(user, index) in filteredUserList" :key="user.email">
         <UserItemContainer :user="user" :index="index" />
       </li>
     </ul>
-    <p class="no-result" v-else>noResult</p>
+    <p class="no-result" v-else-if="search !== ''">noResult</p>
+    <p v-else>Empty Phone Number</p>
   </div>
 </template>
 
@@ -22,6 +26,7 @@ import UserItemContainer from "./UserItemContainer.vue";
   },
 })
 export default class UserList extends Vue {
+  @Prop() public search!: string;
   @Prop() public filteredUserList!: User[];
 }
 </script>

@@ -9,7 +9,7 @@
       />
     </div>
     <InputUserForm />
-    <UserList :filteredUserList="filteredUserList" />
+    <UserList :search="search" :filteredUserList="filteredUserList" />
   </div>
 </template>
 
