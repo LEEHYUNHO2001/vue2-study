@@ -21,13 +21,12 @@ import { User } from '@/types';
 @Component
 export default class UserItem extends Vue {
 	@Prop() public user!: User;
-	@Prop() public index!: number;
 
 	handleIsUpdating() {
 		this.$emit('handleIsUpdating');
 	}
 	userDataDelete() {
-		this.$store.commit('DELETE_USER', this.index);
+		this.$store.commit('DELETE_USER', this.user.email);
 	}
 }
 </script>

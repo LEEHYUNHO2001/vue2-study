@@ -6,7 +6,7 @@ interface AddUserState {
 
 interface UpdateUser {
 	user: User;
-	index: number;
+	origin_email: string;
 }
 
 export default {
@@ -36,16 +36,14 @@ export default {
 		ADD_USER(state: AddUserState, user: User) {
 			state.userList.push(user);
 		},
-		UPDATE_USER(state: AddUserState, { user, index }: UpdateUser) {
-			state.userList = state.userList.map((data, i) => {
-				if (i === index) return user;
+		UPDATE_USER(state: AddUserState, { user, origin_email }: UpdateUser) {
+			state.userList = state.userList.map(data => {
+				if (data.email === origin_email) return user;
 				return data;
 			});
-			// 이 방법은 자신의 값이 바뀐지 몰라 렌더링을 못함
-			// state.userList[index] = user;
 		},
-		DELETE_USER(state: AddUserState, index: number) {
-			state.userList = state.userList.filter((_, i) => i !== index);
+		DELETE_USER(state: AddUserState, email: string) {
+			state.userList = state.userList.filter(user => user.email !== email);
 		},
 		CLEAR_USER(state: AddUserState) {
 			state.userList = [];

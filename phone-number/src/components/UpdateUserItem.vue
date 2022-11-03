@@ -26,7 +26,6 @@ import { User } from '@/types';
 @Component
 export default class UpdateUserItem extends Vue {
 	@Prop() public user!: User;
-	@Prop() public index!: number;
 	updatingUser = { ...this.$props.user };
 
 	handleIsUpdating() {
@@ -36,7 +35,7 @@ export default class UpdateUserItem extends Vue {
 		if (allValidate(this.updatingUser)) {
 			this.$store.commit('UPDATE_USER', {
 				user: this.updatingUser,
-				index: this.index,
+				origin_email: this.user.email,
 			});
 			this.handleIsUpdating();
 		}

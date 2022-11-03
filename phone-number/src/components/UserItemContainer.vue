@@ -3,15 +3,9 @@
 		<UserItem
 			v-if="!isUpdating"
 			:user="user"
-			:index="index"
 			@handleIsUpdating="handleIsUpdating"
 		/>
-		<UpdateUserItem
-			v-else
-			:user="user"
-			:index="index"
-			@handleIsUpdating="handleIsUpdating"
-		/>
+		<UpdateUserItem v-else :user="user" @handleIsUpdating="handleIsUpdating" />
 	</div>
 </template>
 

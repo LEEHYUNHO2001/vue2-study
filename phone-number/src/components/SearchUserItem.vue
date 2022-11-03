@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 
 import { User } from '@/types';
 
@@ -28,20 +28,26 @@ import UserList from './UserList.vue';
 	},
 })
 export default class SearchUserItem extends Vue {
-	get userList() {
-		return this.$store.state.user.userList;
-	}
 	search = '';
 	filteredUserList = this.userList;
 
-	handleSearch() {
-		this.filteredUserList = this.filteringUserList;
+	get userList() {
+		return this.$store.state.user.userList;
 	}
 	get filteringUserList() {
 		return this.userList.filter((user: User) => {
 			const pn = user.phoneNumber;
 			return pn.includes(this.search);
 		});
+	}
+
+	handleSearch() {
+		this.filteredUserList = this.filteringUserList;
+	}
+
+	@Watch('userList')
+	watchUserList() {
+		this.filteredUserList = this.filteringUserList;
 	}
 }
 </script>
