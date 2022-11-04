@@ -20,12 +20,18 @@ import { User } from "@/types";
 
 import InputUserForm from "./InputUserForm.vue";
 import UserList from "./UserList.vue";
+import { mapGetters } from "vuex";
 
 @Component({
   components: {
     InputUserForm,
     UserList,
   },
+  // vue2 vuex typescript에서 헬퍼 함수 사용하는 방법 찾는중..
+  // https://github.com/vuejs/vue-class-component/issues/109
+  // computed: {
+  //   ...mapGetters("UserList", { userList: "getUserList" }),
+  // },
 })
 export default class SearchUserItem extends Vue {
   search = "";
