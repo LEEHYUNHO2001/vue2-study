@@ -1,15 +1,14 @@
 <template>
   <div>
-    <ul
-      class="user-container"
-      v-if="filteredUserList.length > 0 && search === ''"
-    >
+    <ul class="user-container" v-if="filteredUserList.length > 0">
       <li v-for="(user, index) in filteredUserList" :key="user.email">
         <UserItemContainer :user="user" :index="index" />
       </li>
     </ul>
-    <p class="no-result" v-else-if="search !== ''">noResult</p>
-    <p v-else>Empty Phone Number</p>
+    <p class="text" v-else-if="filteredUserList.length === 0 && search !== ''">
+      noResult
+    </p>
+    <p class="text" v-else>Empty Phone Number</p>
   </div>
 </template>
 
@@ -32,7 +31,7 @@ export default class UserList extends Vue {
 </script>
 
 <style scoped>
-.no-result {
+.text {
   margin-top: 30px;
   font-size: 30px;
   font-weight: 700;

@@ -32,13 +32,23 @@ export default class SearchUserItem extends Vue {
   filteredUserList = this.userList;
 
   get userList() {
-    return this.$store.state.user.userList;
+    return this.$store.getters.getUserList;
+  }
+  get isSort() {
+    return this.$store.getters.getIsSort;
+  }
+  get sortUserList() {
+    return this.$store.getters.sortUser;
   }
   get filteringUserList() {
-    return this.userList.filter((user: User) => {
+    // 정렬 boolean값에 따라 userList 결정
+    const userList = this.isSort ? this.sortUserList : this.userList;
+
+    const searchedUserList = userList.filter((user: User) => {
       const pn = user.phoneNumber;
       return pn.includes(this.search);
     });
+    return searchedUserList;
   }
 
   handleSearch() {
@@ -47,7 +57,12 @@ export default class SearchUserItem extends Vue {
 
   @Watch("userList")
   watchUserList() {
-    this.filteredUserList = this.filteringUserList;
+    this.handleSearch();
+  }
+
+  @Watch("isSort")
+  watchIsSort() {
+    this.handleSearch();
   }
 }
 </script>
