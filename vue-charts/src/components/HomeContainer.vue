@@ -1,13 +1,18 @@
 <template>
   <div class="home-container">
     <h1>{{ title }}</h1>
+    <SummaryChart />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-@Component
+import SummaryChart from "@/components/SummaryChart.vue";
+
+@Component({
+  components: { SummaryChart },
+})
 export default class HomeContainer extends Vue {
   title = "HomeContainer";
 }
