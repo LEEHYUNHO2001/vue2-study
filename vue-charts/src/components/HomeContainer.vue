@@ -8,7 +8,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import SummaryChart from "@/components/SummaryChart.vue";
+import SummaryChart from "@/components/SummaryChart/SummaryChart.vue";
 
 @Component({
   components: { SummaryChart },
