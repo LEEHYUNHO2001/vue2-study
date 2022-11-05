@@ -5,6 +5,15 @@
     </header>
     <main>
       <TodoInput :item="todoText" @input="updateTodoText" @add="addTodoItem" />
+      <ul>
+        <TodoItem
+          v-for="(item, i) in todoItems"
+          :key="item + i"
+          :item="item"
+          :index="i"
+          @remove="removeTodoItem"
+        />
+      </ul>
     </main>
   </div>
 </template>
@@ -13,6 +22,7 @@
 import Vue from "vue";
 
 import TodoInput from "./TodoInput.vue";
+import TodoItem from "./TodoItem.vue";
 
 const storageKey = "vue-func-ts-todo";
 const storage = {
@@ -31,7 +41,7 @@ export default Vue.extend({
   props: {
     title: String,
   },
-  components: { TodoInput },
+  components: { TodoInput, TodoItem },
   data() {
     return {
       todoText: "",
@@ -46,6 +56,10 @@ export default Vue.extend({
       this.todoItems.push(this.todoText);
       storage.save(this.todoItems);
       this.initTodoText();
+    },
+    removeTodoItem(index: number) {
+      this.todoItems.splice(index, 1);
+      storage.save(this.todoItems);
     },
     initTodoText() {
       this.todoText = "";
