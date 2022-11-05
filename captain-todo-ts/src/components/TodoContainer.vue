@@ -1,14 +1,30 @@
 <template>
-  <section class="hello">
-    <h1>{{ title }}</h1>
-    <todo-input :item="todoText" @input="updateTodoText" @add="addTodoItem" />
-  </section>
+  <div class="todo-container">
+    <header>
+      <h1>{{ title }}</h1>
+    </header>
+    <main>
+      <TodoInput :item="todoText" @input="updateTodoText" @add="addTodoItem" />
+    </main>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 
 import TodoInput from "./TodoInput.vue";
+
+const storageKey = "vue-func-ts-todo";
+const storage = {
+  save(todoItems: string[]) {
+    const parsed = JSON.stringify(todoItems);
+    localStorage.setItem(storageKey, parsed);
+  },
+  fetch() {
+    const todoItems = localStorage.getItem(storageKey) || "[]";
+    return JSON.parse(todoItems);
+  },
+};
 
 export default Vue.extend({
   name: "TodoContainer",
@@ -19,6 +35,7 @@ export default Vue.extend({
   data() {
     return {
       todoText: "",
+      todoItems: [] as string[],
     };
   },
   methods: {
@@ -26,12 +43,19 @@ export default Vue.extend({
       this.todoText = value;
     },
     addTodoItem() {
-      localStorage.setItem(this.todoText, this.todoText);
+      this.todoItems.push(this.todoText);
+      storage.save(this.todoItems);
       this.initTodoText();
     },
     initTodoText() {
       this.todoText = "";
     },
+    fetchTodoItems() {
+      this.todoItems = storage.fetch();
+    },
+  },
+  created() {
+    this.fetchTodoItems();
   },
 });
 </script>
