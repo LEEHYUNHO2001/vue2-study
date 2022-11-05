@@ -8,10 +8,11 @@
       <ul>
         <TodoItem
           v-for="(item, i) in todoItems"
-          :key="item + i"
+          :key="item.title + i"
           :item="item"
           :index="i"
           @remove="removeTodoItem"
+          @toggle="toggleItemComplete"
         />
       </ul>
     </main>
@@ -24,9 +25,14 @@ import Vue from "vue";
 import TodoInput from "./TodoInput.vue";
 import TodoItem from "./TodoItem.vue";
 
+export interface Todo {
+  title: string;
+  done: boolean;
+}
+
 const storageKey = "vue-func-ts-todo";
 const storage = {
-  save(todoItems: string[]) {
+  save(todoItems: Todo[]) {
     const parsed = JSON.stringify(todoItems);
     localStorage.setItem(storageKey, parsed);
   },
@@ -45,7 +51,7 @@ export default Vue.extend({
   data() {
     return {
       todoText: "",
-      todoItems: [] as string[],
+      todoItems: [] as Todo[],
     };
   },
   methods: {
@@ -53,7 +59,11 @@ export default Vue.extend({
       this.todoText = value;
     },
     addTodoItem() {
-      this.todoItems.push(this.todoText);
+      const todo: Todo = {
+        title: this.todoText,
+        done: false,
+      };
+      this.todoItems.push(todo);
       storage.save(this.todoItems);
       this.initTodoText();
     },
@@ -66,6 +76,13 @@ export default Vue.extend({
     },
     fetchTodoItems() {
       this.todoItems = storage.fetch();
+    },
+    toggleItemComplete(item: Todo, index: number) {
+      this.todoItems.splice(index, 1, {
+        ...item,
+        done: !item.done,
+      });
+      storage.save(this.todoItems);
     },
   },
   created() {
