@@ -1,19 +1,30 @@
 <template>
   <div>
-    <label for="todo-input"></label>
-    <input id="todo-input" type="text" />
-    <button type="button" @click="addTodo">add</button>
+    <label for="todo-input">오늘 할 일 : </label>
+    <input id="todo-input" type="text" :value="item" @input="handleInput" />
+    <button type="button" @click="addTodo">추가</button>
   </div>
 </template>
 
 <script lang="ts">
-export default {
-  methods: {
-    addTodo() {
-      console.log("add");
+import Vue from "vue";
+
+export default Vue.extend({
+  props: {
+    item: {
+      type: String,
+      required: true,
     },
   },
-};
+  methods: {
+    handleInput(e: Event) {
+      this.$emit("input", (e.target as HTMLInputElement).value);
+    },
+    addTodo() {
+      this.$emit("add");
+    },
+  },
+});
 </script>
 
 <style scoped>
