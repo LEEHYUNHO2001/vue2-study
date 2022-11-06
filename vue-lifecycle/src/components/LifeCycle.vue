@@ -6,21 +6,21 @@
 
 <script>
 export default {
-  data(){
-    return{
-      msg: "A"
-    }
+  data() {
+    return {
+      msg: "A",
+    };
   },
-  beforeCreate(){
+  beforeCreate() {
     console.log("beforeCreate");
-    
+
     // this.msg = "B";
     /*
       beforeCreate 단계에서 data나 methods 속성이 인스턴스에 저장되어 있지 않다.
       그러므로 UI는 A를 출력한다.
     */
   },
-  created(){
+  created() {
     console.log("created");
 
     // this.msg = "B";
@@ -29,9 +29,8 @@ export default {
       하지만 인스턴스가 화면에 부착하기 전 이므로 template속성에 정의된 DOM Element로 접근할 수 없다.
       API Endpoint에서 데이터를 받아 초기화하는 경우에 많이 사용한다. (또는 이벤트 리스너 선언)
     */
-
   },
-  beforeMount(){
+  beforeMount() {
     console.log("beforeMount");
 
     // this.msg = "B";
@@ -48,7 +47,7 @@ export default {
       그냥 웹에서 데이터를 받아 state에 초기화하는 경우가 많기 때문인 것 같다.
     */
   },
-  mounted(){
+  mounted() {
     console.log("mounted");
 
     this.msg = "B";
@@ -70,7 +69,8 @@ export default {
       stackoverflow 자료 첨부한것을 확인하자.
     */
   },
-  beforeUpdate(){
+  beforeUpdate() {
+    this.msg = "C";
     console.log("beforeUpdate");
 
     /*
@@ -78,7 +78,7 @@ export default {
       변경되는 값을 추가적으로 변화시켜도 다시 update관련 라이프사이클을 호출하지 않는다.
     */
   },
-  updated(){
+  updated() {
     console.log("updated");
 
     /*
@@ -89,7 +89,7 @@ export default {
       mounted와 마찬가지로 this.$nextTick를 사용할 수 있다.
     */
   },
-  beforeDestroy(){
+  beforeDestroy() {
     console.log("beforeDestroy");
 
     /*
@@ -97,22 +97,20 @@ export default {
       이벤트 리스너 해제 등의 작업을 해주면 된다. (메모리를 위해..!)
     */
   },
-  destroyed(){
+  destroyed() {
     console.log("destroyed");
 
     /*
       vue 인스턴스가 해체되고 난 이후에 호출된다.
     */
-  }
+  },
   /*
     이 외에도 라이프 사이클 훅에는 ativated, unmount 등이 있다.
     React라이프 사이클 종류도 많은데 다 사용하지는 않는 것 처럼 Vue도 그렇다.
     https://v3.ko.vuejs.org/api/options-lifecycle-hooks.html
     궁금하다면 공식문서를 보고, 필요한 경우에 적용하면 될 것 같다.
   */
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
