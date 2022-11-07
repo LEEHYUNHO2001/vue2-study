@@ -1,8 +1,6 @@
 <template>
   <div class="container">
     <h2 class="title">{{ title }}</h2>
-    <span>count : {{ count }}</span>
-    <button class="increase-btn" type="button" @click="increaseCount">+</button>
   </div>
 </template>
 
@@ -11,11 +9,10 @@ import Vue from "vue";
 
 export default Vue.extend({
   // eslint-disable-next-line vue/multi-word-component-names
-  name: "Counter",
+  name: "Ect",
   data() {
     return {
-      title: "Counter",
-      count: 0,
+      title: "Ect",
     };
   },
   methods: {
@@ -24,22 +21,22 @@ export default Vue.extend({
     },
   },
   created() {
-    console.log("Counter created");
+    console.log("Ect created");
   },
   mounted() {
-    console.log("Counter mounted");
+    console.log("Ect mounted");
   },
   updated() {
-    console.log("Counter updated");
+    console.log("Ect updated");
   },
   destroyed() {
-    console.log("Counter destroyed");
+    console.log("Ect destroyed");
   },
   activated() {
-    console.log("Counter activated");
+    console.log("Ect activated");
   },
   deactivated() {
-    console.log("Counter deactivated");
+    console.log("Ect deactivated");
   },
 });
 </script>
@@ -52,11 +49,5 @@ export default Vue.extend({
   margin-bottom: 30px;
   font-size: 20px;
   font-weight: 700;
-}
-.increase-btn {
-  width: 20px;
-  height: 20px;
-  margin-left: 20px;
-  border: 1px solid #000;
 }
 </style>
