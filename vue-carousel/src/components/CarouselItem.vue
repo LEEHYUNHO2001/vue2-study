@@ -1,21 +1,17 @@
 <template>
-  <li>
+  <div>
     <img :src="item.SRC" :alt="`${item.TITLE}이미지`" />
-  </li>
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
-interface Props {
-  ID: string;
-  SRC: string;
-  TITLE: string;
-}
+import { CarouselItemType } from "@/types";
 
 @Component
 export default class CarouselItem extends Vue {
-  @Prop() public item!: Props;
+  @Prop() public item!: CarouselItemType;
 }
 </script>
 
