@@ -6,11 +6,13 @@
     "noImplicitAny": false,
     "allowJs": true,
     "jsx": "preserve",
-    "importHelpers": true,
     "moduleResolution": "node",
+    "experimentalDecorators": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
     "sourceMap": true,
     "baseUrl": ".",
     "types": ["webpack-env"],
@@ -24,8 +26,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx",
-    "src/types/**/*.d.ts"
+    "tests/**/*.tsx"
   ],
   "exclude": ["node_modules"]
 }
