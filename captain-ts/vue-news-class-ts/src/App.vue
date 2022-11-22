@@ -8,34 +8,34 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+
 import ToolBar from "./components/ToolBar.vue";
 import Spinner from "./components/Spinner.vue";
-import bus from "./utils/bus.js";
+import bus from "./utils/bus";
 
-export default {
+@Component({
   components: {
     ToolBar,
     Spinner,
   },
-  data() {
-    return {
-      loading: false,
-    };
-  },
-  methods: {
-    onProgress() {
-      this.loading = true;
-    },
-    offProgress() {
-      this.loading = false;
-    },
-  },
+})
+export default class App extends Vue {
+  loading = false;
+
+  onProgress() {
+    this.loading = true;
+  }
+  offProgress() {
+    this.loading = false;
+  }
+
   created() {
     bus.$on("on:progress", this.onProgress);
     bus.$on("off:progress", this.offProgress);
-  },
-};
+  }
+}
 </script>
 
 <style>
