@@ -20,7 +20,7 @@ import {InitUser} from "@/types";
 export default class PhoneNumber extends Vue {
   title = "전화번호부";
 
-  async getUserProxy() {
+  async getUsersProxy() {
     try {
       const res = await axios.get("/phonenumbers");
       return res.data;
@@ -29,7 +29,7 @@ export default class PhoneNumber extends Vue {
     }
   }
   async objectKeyNameTransform() {
-    const data = await this.getUserProxy();
+    const data = await this.getUsersProxy();
     const newData = data.map((user:InitUser) => {
       return {
         name: user.userName,

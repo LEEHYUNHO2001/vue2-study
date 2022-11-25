@@ -6,10 +6,13 @@ export interface InitUser {
   date: string;
 }
 
-export interface User {
+export interface UserPost {
   name: string;
   phoneNumber: string;
   email: string;
+}
+
+export interface User extends UserPost {
   date: string;
 }
 

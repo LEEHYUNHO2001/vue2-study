@@ -15,7 +15,8 @@
 import { Component, Vue } from "vue-property-decorator";
 
 import { allValidate } from "@/utils/validate";
-import { User } from "@/types";
+import { UserPost } from "@/types";
+import axios from "axios";
 
 @Component
 export default class InputUserForm extends Vue {
@@ -23,8 +24,7 @@ export default class InputUserForm extends Vue {
     name: "",
     phoneNumber: "",
     email: "",
-    date: "",
-  } as User;
+  } as UserPost;
 
   // userDataSubmit에서 this.$emit('addUser', this.user);
   // 대신 this.addUser(this.user) 사용 가능
@@ -35,36 +35,72 @@ export default class InputUserForm extends Vue {
     return this.$store.getters.getIsSort;
   }
 
+  async postUserProxy() {
+    try {
+      const body = {
+        phoneNumber: this.user.phoneNumber,
+        userName: this.user.name,
+        email: this.user.email
+      }
+      await axios({
+        url: "/phonenumber",
+        method: "post",
+        data: body,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // date를 backend에서 생성하고, front에서 바로 보여줘야 하므로
+  // post하자마자 해당 phone number을 가진 유저 정보 get하기
+  async getUserProxy() {
+    try {
+      const res = await axios.get(`/phonenumber/${this.user.phoneNumber}`);
+      return {
+        name: res.data.userName,
+        phoneNumber: res.data.phoneNumber,
+        email: res.data.email,
+        date: res.data.date
+      };
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   userDataSort() {
     this.$store.commit("SORT_USER");
   }
   userDataClear() {
     this.$store.commit("CLEAR_USER");
   }
-  userDataSubmit() {
+  async userDataSubmit() {
     if (allValidate(this.user)) {
-      this.currentDate();
+      // 이제 date는 백엔드에서 생성
+      // this.currentDate();
+
       // this.$emit('addUser', this.user);
-      this.$store.commit("ADD_USER", this.user);
+      await this.postUserProxy();
+      const createdUser = await this.getUserProxy();
+      await this.$store.commit("ADD_USER", createdUser);
       this.clearInput();
     }
   }
-  currentDate() {
-    const current = new Date();
-    const year = current.getFullYear();
-    const month = current.getMonth() + 1;
-    const date = current.getDate();
-    const hours = current.getHours();
-    const minutes = current.getMinutes();
-
-    this.user.date = `${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분`;
-  }
+  // currentDate() {
+  //   const current = new Date();
+  //   const year = current.getFullYear();
+  //   const month = current.getMonth() + 1;
+  //   const date = current.getDate();
+  //   const hours = current.getHours();
+  //   const minutes = current.getMinutes();
+  //
+  //   this.user.date = `${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분`;
+  // }
   clearInput() {
     this.user = {
       name: "",
       phoneNumber: "",
       email: "",
-      date: "",
     };
   }
 }
