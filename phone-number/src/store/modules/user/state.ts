@@ -21,5 +21,5 @@ export const userState = {
     //   date: "2020년 3월 20일 14시 21분",
     // },
   ] as User[],
-  // isSort: false as boolean,
+  isSort: false as boolean,
 };

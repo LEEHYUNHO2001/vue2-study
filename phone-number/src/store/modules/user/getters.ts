@@ -9,9 +9,8 @@ const getIsSort = (state: AddUserState) => {
 };
 
 const sortUser = (state: AddUserState) => {
-  const a = [...state.userList];
-  const sortedUserList = [...a.sort((a, b) => a.name.localeCompare(b.name))];
-  return sortedUserList;
+  const userListCopy = [...state.userList];
+  return userListCopy.sort((a, b) => a.name.localeCompare(b.name));
 };
 
 export { getUserList, getIsSort, sortUser };
