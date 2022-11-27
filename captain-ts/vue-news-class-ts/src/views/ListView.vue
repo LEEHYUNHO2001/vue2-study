@@ -5,11 +5,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 import { fetchNews } from "@/api";
 
 import ListItem from "../components/ListItem.vue";
+import { NewsItem } from "@/types";
 
 @Component({
   components: {
@@ -17,7 +18,7 @@ import ListItem from "../components/ListItem.vue";
   },
 })
 export default class ListView extends Vue {
-  newsItems = [];
+  newsItems = [] as NewsItem[];
 
   async fetchNewsItems() {
     const res = await fetchNews();
