@@ -17,16 +17,29 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 import { User } from "@/types";
+import axios from "axios";
 
 @Component
 export default class UserItem extends Vue {
   @Prop() public user!: User;
 
+  async deleteUserProxy() {
+    try {
+      await axios.delete(`/phonenumber/${this.user.phoneNumber}`);
+      return this.user.email;
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   handleIsUpdating() {
     this.$emit("handleIsUpdating");
   }
-  userDataDelete() {
-    this.$store.commit("DELETE_USER", this.user.email);
+  async userDataDelete() {
+    const deletedUserEmail = await this.deleteUserProxy();
+    if (deletedUserEmail) {
+      await this.$store.commit("DELETE_USER", deletedUserEmail);
+    }
   }
 }
 </script>

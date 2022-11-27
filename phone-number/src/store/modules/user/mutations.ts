@@ -1,4 +1,8 @@
-import { AddUserState, UpdateUser, User } from "@/types";
+import { AddUserState, InitUser, UpdateUser, User } from "@/types";
+
+const INIT_USER = (state: AddUserState, user: User[]) => {
+  state.userList = user;
+};
 
 const ADD_USER = (state: AddUserState, user: User) => {
   state.userList.push(user);
@@ -25,4 +29,4 @@ const CLEAR_USER = (state: AddUserState) => {
   state.userList = [];
 };
 
-export { ADD_USER, UPDATE_USER, DELETE_USER, SORT_USER, CLEAR_USER };
+export { INIT_USER, ADD_USER, UPDATE_USER, DELETE_USER, SORT_USER, CLEAR_USER };

@@ -14,13 +14,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from "vue-property-decorator";
+import {Component, Vue, Watch} from "vue-property-decorator";
 
-import { User } from "@/types";
+import {User} from "@/types";
 
 import InputUserForm from "./InputUserForm.vue";
 import UserList from "./UserList.vue";
-import { mapGetters } from "vuex";
 
 @Component({
   components: {
@@ -46,19 +45,18 @@ export default class SearchUserItem extends Vue {
   get sortUserList() {
     return this.$store.getters.sortUser;
   }
-  get filteringUserList() {
+  get sortAndSearchedUserList() {
     // 정렬 boolean값에 따라 userList 결정
     const userList = this.isSort ? this.sortUserList : this.userList;
 
-    const searchedUserList = userList.filter((user: User) => {
+    return userList.filter((user: User) => {
       const pn = user.phoneNumber;
       return pn.includes(this.search);
     });
-    return searchedUserList;
   }
 
   handleSearch() {
-    this.filteredUserList = this.filteringUserList;
+    this.filteredUserList = this.sortAndSearchedUserList;
   }
 
   @Watch("userList")

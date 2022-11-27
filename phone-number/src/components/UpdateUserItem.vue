@@ -1,5 +1,5 @@
 <template>
-  <form class="user-content" @submit.prevent="userDataUpdate">
+  <form class="user-content" @submit.prevent="onClickUpdateBtn">
     <button type="submit" class="submit-update-btn">update submit</button>
     <div>
       <label> user : </label>
@@ -22,21 +22,45 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 import { allValidate } from "@/utils";
 import { User } from "@/types";
+import axios from "axios";
 
 @Component
 export default class UpdateUserItem extends Vue {
   @Prop() public user!: User;
   updatingUser = { ...this.$props.user };
 
+  async updateUserProxy() {
+    try {
+      const body = {
+        userName: this.updatingUser.name,
+        phoneNumber: this.updatingUser.phoneNumber,
+        email: this.updatingUser.email,
+      };
+      await axios({
+        url: `phonenumber/${this.user.phoneNumber}`,
+        method: "put",
+        data: body,
+      });
+      return true;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   handleIsUpdating() {
     this.$emit("handleIsUpdating");
   }
   userDataUpdate() {
+    this.$store.commit("UPDATE_USER", {
+      user: this.updatingUser,
+      origin_email: this.user.email,
+    });
+  }
+  async onClickUpdateBtn() {
     if (allValidate(this.updatingUser)) {
-      this.$store.commit("UPDATE_USER", {
-        user: this.updatingUser,
-        origin_email: this.user.email,
-      });
+      const res =await this.updateUserProxy();
+      if(res) await this.userDataUpdate();
+      else alert("서버에 문제가 있습니다.");
       this.handleIsUpdating();
     }
   }

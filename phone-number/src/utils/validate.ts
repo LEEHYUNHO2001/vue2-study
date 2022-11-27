@@ -3,9 +3,9 @@ import {
   phoneNumberRegex,
   emailRegex,
 } from "@/constants/validation";
-import { User } from "@/types";
+import { UserPost } from "@/types";
 
-export const allValidate = (user: User) => {
+export const allValidate = (user: UserPost) => {
   if (
     !emptyValidate(user) &&
     !userNameValidate(user) &&
@@ -14,14 +14,14 @@ export const allValidate = (user: User) => {
   )
     return true;
 };
-const emptyValidate = (user: User) => {
+const emptyValidate = (user: UserPost) => {
   const { name, phoneNumber, email } = user;
   if (!name || !phoneNumber || !email) {
     alert("모두 입력해주세요.");
     return true;
   }
 };
-const userNameValidate = (user: User) => {
+const userNameValidate = (user: UserPost) => {
   const { name } = user;
   if (
     !nameRegex.test(name) ||
@@ -32,14 +32,14 @@ const userNameValidate = (user: User) => {
     return true;
   }
 };
-const phoneNumberValidate = (user: User) => {
+const phoneNumberValidate = (user: UserPost) => {
   const { phoneNumber } = user;
   if (!phoneNumberRegex.test(phoneNumber) || phoneNumber.length > 10) {
     alert("10자리 이하의 숫자만 입력해주세요.");
     return true;
   }
 };
-const emailValidate = (user: User) => {
+const emailValidate = (user: UserPost) => {
   const { email } = user;
   if (!emailRegex.test(email) || email.length > 40) {
     alert("40자리 이하의 이메일 형식으로 입력해주세요.");
