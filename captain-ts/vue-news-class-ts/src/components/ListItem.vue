@@ -1,6 +1,6 @@
 <template>
   <ul class="news-list">
-    <li v-for="news in listItems" :key="news.id" class="post">
+    <li v-for="news in items" :key="news.id" class="post">
       <div class="points">
         {{ news.points || 0 }}
       </div>
@@ -28,21 +28,32 @@
           }}</router-link>
         </small>
         <small v-if="news.time_ago" class="link-text">
-          {{ news.time_ago }}
+          {{ timeAgo(news) }}
         </small>
       </div>
     </li>
   </ul>
 </template>
 
-<script>
-export default {
-  computed: {
-    listItems() {
-      return this.$store.getters.fetchedList;
-    },
-  },
-};
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
+
+import { NewsItem } from "@/types";
+
+@Component
+export default class ListItem extends Vue {
+  @Prop() public items!: NewsItem[];
+
+  timeAgo(news: NewsItem): string {
+    return news.time_ago;
+  }
+
+  // 라우터에서 데이터 요청 지시 내리고, 전역 관리되는 데이터 받았었음.
+  // 이제는 부모 컴포넌트에서 데이터 요청하고 props로 데이터 받음.
+  // get listItems() {
+  //   return this.$store.getters.fetchedList;
+  // }
+}
 </script>
 
 <style scoped>

@@ -1,4 +1,6 @@
-import axios from "axios";
+import axios, { AxiosPromise } from "axios";
+
+import { NewsItem } from "@/types";
 
 const api = {
   news: "https://api.hnpwa.com/v0/news/1.json",
@@ -8,7 +10,7 @@ const api = {
   item: "https://api.hnpwa.com/v0/item/",
 };
 
-function fetchNews() {
+function fetchNews(): AxiosPromise<NewsItem[]> {
   return axios.get(api.news);
 }
 
@@ -20,17 +22,17 @@ function fetchJobs() {
   return axios.get(api.jobs);
 }
 
-function fetchUser(id) {
+function fetchUser(id: string) {
   const url = `${api.user}${id}.json`;
   return axios.get(url);
 }
 
-function fetchItem(id) {
+function fetchItem(id: string) {
   const url = `${api.item}${id}.json`;
   return axios.get(url);
 }
 
-function fetchList(type) {
+function fetchList(type: string) {
   const url = `https://api.hnpwa.com/v0/${type}/1.json`;
   return axios.get(url);
 }
