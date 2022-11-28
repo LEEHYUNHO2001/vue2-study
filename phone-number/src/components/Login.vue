@@ -44,7 +44,7 @@ export default class Login extends Vue {
   } as LoginData;
 
   async handleSubmit() {
-    await this.postAccessToken();
+    await this.saveAccessToken();
     await this.clearLoginData();
   }
   handleLoginData(e: InputEvent) {
@@ -67,10 +67,15 @@ export default class Login extends Vue {
         method: "post",
         data: this.loginData,
       });
-      console.log(res.data);
+      return res.data;
     } catch (err) {
       console.log(err);
     }
+  }
+  async saveAccessToken() {
+    const data = await this.postAccessToken();
+    const accessToken = data.token;
+    this.$store.commit("SUCCESS_GET_ACCESSTOKEN", accessToken);
   }
 }
 </script>
