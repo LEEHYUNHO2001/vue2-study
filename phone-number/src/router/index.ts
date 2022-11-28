@@ -34,12 +34,13 @@ router.beforeEach(async function (to, from, next) {
     try {
       const accessToken = router.app.$store.getters.getAccessToken;
       const authHeader = { Authorization: `Bearer ${accessToken}` };
-      const res = await axios.get(`${apiEndpoint}/api/Login/GetList`, {
+      await axios.get(`${apiEndpoint}/api/Login/GetList`, {
         headers: authHeader,
       });
-      console.log(res);
+      next();
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      await router.push("/login");
     }
   } else {
     next();

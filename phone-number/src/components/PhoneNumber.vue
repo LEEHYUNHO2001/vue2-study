@@ -1,5 +1,6 @@
 <template>
   <section class="phone-number">
+    <button type="button" @click="clearAccessToken">Logout</button>
     <h1 class="title">{{ title }}</h1>
     <SearchUserItem />
   </section>
@@ -40,6 +41,10 @@ export default class PhoneNumber extends Vue {
       };
     });
     this.$store.commit("INIT_USER", newData);
+  }
+  clearAccessToken() {
+    this.$store.commit("CLEAR_ACCESSTOKEN");
+    this.$router.push("/login");
   }
   mounted() {
     this.objectKeyNameTransform();

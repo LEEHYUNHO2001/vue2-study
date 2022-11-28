@@ -1,29 +1,32 @@
 <template>
-  <form @submit.prevent="handleSubmit">
-    <div>
-      <label for="userName">Name :</label>
-      <input
-        type="text"
-        id="userName"
-        name="userName"
-        placeholder="userName"
-        @input="handleLoginData"
-        :value="loginData.userName"
-      />
-    </div>
-    <div>
-      <label for="password">Password :</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="password"
-        @input="handleLoginData"
-        :value="loginData.password"
-      />
-    </div>
-    <button type="submit">Login</button>
-  </form>
+  <section>
+    <h2>로그인이 필요한 서비스입니다.</h2>
+    <form @submit.prevent="handleSubmit">
+      <div>
+        <label for="userName">Name :</label>
+        <input
+            type="text"
+            id="userName"
+            name="userName"
+            placeholder="userName"
+            @input="handleLoginData"
+            :value="loginData.userName"
+        />
+      </div>
+      <div>
+        <label for="password">Password :</label>
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="password"
+            @input="handleLoginData"
+            :value="loginData.password"
+        />
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </section>
 </template>
 
 <script lang="ts">
@@ -89,6 +92,7 @@ export default class Login extends Vue {
     const data = await this.postAccessToken();
     const accessToken = data.token;
     this.$store.commit("SUCCESS_GET_ACCESSTOKEN", accessToken);
+    this.$router.push('/');
   }
 }
 </script>
