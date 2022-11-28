@@ -28,7 +28,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { apiEndpoint } from "@/constants";
 
 interface LoginData {
@@ -58,7 +58,7 @@ export default class Login extends Vue {
     this.loginData = {
       userName: "",
       password: "",
-    }
+    };
   }
   async postAccessToken() {
     try {
@@ -69,7 +69,20 @@ export default class Login extends Vue {
       });
       return res.data;
     } catch (err) {
-      console.log(err);
+      if(err instanceof AxiosError){
+        if (err.response) {
+          // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+          alert(err.response.data);
+        } else if (err.request) {
+          // 요청이 이루어 졌으나 응답을 받지 못했습니다.
+          // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+          // Node.js의 http.ClientRequest 인스턴스입니다.
+          console.log(err.request);
+        } else {
+          // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
+          console.log("Error", err.message);
+        }
+      }
     }
   }
   async saveAccessToken() {
