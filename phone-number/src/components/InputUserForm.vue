@@ -17,6 +17,7 @@ import { Component, Vue } from "vue-property-decorator";
 import { allValidate } from "@/utils/validate";
 import { UserPost } from "@/types";
 import axios from "axios";
+import { apiEndpoint } from "@/constants";
 
 @Component
 export default class InputUserForm extends Vue {
@@ -40,10 +41,10 @@ export default class InputUserForm extends Vue {
       const body = {
         phoneNumber: this.user.phoneNumber,
         userName: this.user.name,
-        email: this.user.email
-      }
+        email: this.user.email,
+      };
       await axios({
-        url: "/phonenumber",
+        url: `${apiEndpoint}/phonenumber`,
         method: "post",
         data: body,
       });
@@ -56,15 +57,17 @@ export default class InputUserForm extends Vue {
   // post하자마자 해당 phone number을 가진 유저 정보 get하기
   async getUserProxy() {
     try {
-      const res = await axios.get(`/phonenumber/${this.user.phoneNumber}`);
+      const res = await axios.get(
+        `${apiEndpoint}/phonenumber/${this.user.phoneNumber}`
+      );
       return {
         name: res.data.userName,
         phoneNumber: res.data.phoneNumber,
         email: res.data.email,
-        date: res.data.date
+        date: res.data.date,
       };
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   }
 

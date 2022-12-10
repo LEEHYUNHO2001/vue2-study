@@ -23,6 +23,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import { allValidate } from "@/utils";
 import { User } from "@/types";
 import axios from "axios";
+import { apiEndpoint } from "@/constants";
 
 @Component
 export default class UpdateUserItem extends Vue {
@@ -37,7 +38,7 @@ export default class UpdateUserItem extends Vue {
         email: this.updatingUser.email,
       };
       await axios({
-        url: `phonenumber/${this.user.phoneNumber}`,
+        url: `${apiEndpoint}/phonenumber/${this.user.phoneNumber}`,
         method: "put",
         data: body,
       });
@@ -58,8 +59,8 @@ export default class UpdateUserItem extends Vue {
   }
   async onClickUpdateBtn() {
     if (allValidate(this.updatingUser)) {
-      const res =await this.updateUserProxy();
-      if(res) await this.userDataUpdate();
+      const res = await this.updateUserProxy();
+      if (res) await this.userDataUpdate();
       else alert("서버에 문제가 있습니다.");
       this.handleIsUpdating();
     }

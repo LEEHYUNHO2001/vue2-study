@@ -18,6 +18,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 import { User } from "@/types";
 import axios from "axios";
+import { apiEndpoint } from "@/constants";
 
 @Component
 export default class UserItem extends Vue {
@@ -25,10 +26,10 @@ export default class UserItem extends Vue {
 
   async deleteUserProxy() {
     try {
-      await axios.delete(`/phonenumber/${this.user.phoneNumber}`);
+      await axios.delete(`${apiEndpoint}/phonenumber/${this.user.phoneNumber}`);
       return this.user.email;
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   }
 
